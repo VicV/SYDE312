@@ -12,8 +12,9 @@ greyImage = rgb2gray(fullImage);
 image = im2double(greyImage);     
 
 %Show original figure for comparison
-figure(1)  
-
+figure(1)
+    imshow(image)
+    axis off
 
 %Find the emperical mean along each dimension. Put in 1 dimensional matrix
 columnMean = mean(image);   
@@ -36,7 +37,7 @@ covariance = cov(meanDeviations);
 [V,D] = eig(covariance); 
 
 %Pick a number of components, subtract it from the number of columns.
-components = n - 205;                                                     
+components = n - 2;                                                     
 principalVectors = V;
 
 %Clear from left to right (ascending) the vectors we do not want.
@@ -51,7 +52,6 @@ compressedImage=principalVectors*(principalVectors' * meanDeviations.');
 
 %Then, add the means!
 compressedImage=compressedImage'+means;
-                    
-
+    figure(2)     
     imshow(compressedImage)
     axis off
